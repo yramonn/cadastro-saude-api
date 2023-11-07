@@ -1,5 +1,7 @@
 package com.ekan.cadSaudeAPI.model;
 
+import com.ekan.cadSaudeAPI.enums.TipoDocumento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -18,7 +20,7 @@ public class Documento {
     @NotNull
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private String tipoDocumento;
+    private TipoDocumento tipoDocumento;
 
     @NotNull
     @Column(nullable = false)
@@ -29,13 +31,12 @@ public class Documento {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataInclusao;
 
-    @NotNull
-    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "beneficiario_id",  nullable = false)
+    @JsonIgnore
     private Beneficiario beneficiario;
 }
