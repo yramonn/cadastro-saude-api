@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "32ac56ff-cfbb-4d16-bbd6-a245c68a8556",
+		"name": "cadSaudeAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18967945"
+	},
+	"item": [
+		{
+			"name": "cadastrarBeneficiarioComDocumentos",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "listarBenef",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "listarDocumentosPorBenef",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "atualizarBenef",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBeneficiario",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
