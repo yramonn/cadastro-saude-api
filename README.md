@@ -7,7 +7,10 @@ de beneficiários de um plano de saúde.
 
 # Acessar o Swagger UI
 
-localhost:8081/swagger-ui/index.html (Por padrão, settei no application.properties para o projeto subir na porta 8081 )
+- localhost:8081/swagger-ui/index.html
+- (Por padrão, settei no application.properties para o projeto subir na porta 8081)
+- ![image](https://github.com/yramonn/cadastro-saude-api/assets/86327797/220d8811-755f-4c87-a929-faf919727342)
+
 
 # Acessar h2 Database
 
@@ -16,6 +19,8 @@ localhost:8081/swagger-ui/index.html (Por padrão, settei no application.propert
 - spring.datasource.username=admin
 - spring.datasource.password=1234
 - Após aplicação subir, todas tabelas serão criadas automaticamente: spring.jpa.hibernate.ddl-auto=update
+- ![image](https://github.com/yramonn/cadastro-saude-api/assets/86327797/45f1ee89-7a83-4fad-b504-405735c13751)
+
 
 
 # Tecnologias utilizadas
