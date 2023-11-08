@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.Date;
 
@@ -28,15 +30,19 @@ public class Documento {
 
     @NotNull
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataInclusao;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataAtualizacao;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "beneficiario_id",  nullable = false)
     @JsonIgnore
     private Beneficiario beneficiario;
+
+    public void setDataAtualizacaoVazia() {
+        this.dataAtualizacao = null;
+    }
 }

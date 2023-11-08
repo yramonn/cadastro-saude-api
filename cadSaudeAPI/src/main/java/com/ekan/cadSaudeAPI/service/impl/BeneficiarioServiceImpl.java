@@ -8,6 +8,7 @@ import com.ekan.cadSaudeAPI.model.Documento;
 import com.ekan.cadSaudeAPI.repository.BeneficiarioRepository;
 import com.ekan.cadSaudeAPI.repository.DocumentoRepository;
 import com.ekan.cadSaudeAPI.service.BeneficiarioService;
+import com.ekan.cadSaudeAPI.service.DocumentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,8 @@ public class BeneficiarioServiceImpl implements BeneficiarioService {
     DocumentoRepository documentoRepository;
 
     @Autowired
-    ModelMapperConfig modelMapper;
+    DocumentoService documentoService;
+
 
 
     public Beneficiario cadastrarBeneficiarioComDocumentos(BeneficiarioDTO beneficiarioDTO) {
@@ -36,6 +38,7 @@ public class BeneficiarioServiceImpl implements BeneficiarioService {
         beneficiario.setTelefone(beneficiarioDTO.getTelefone());
         beneficiario.setDataNascimento(beneficiarioDTO.getDataNascimento());
         beneficiario.setDataInclusao(new Date());
+        validarBenef(beneficiario);
 
         List<Documento> documentos = new ArrayList<>();
         for (DocumentoDTO documentoDTO : beneficiarioDTO.getDocumentos()) {
@@ -43,8 +46,11 @@ public class BeneficiarioServiceImpl implements BeneficiarioService {
             documento.setTipoDocumento(documentoDTO.getTipoDocumento());
             documento.setDescricao(documentoDTO.getDescricao());
             documento.setDataInclusao(new Date());
+            documento.setDataAtualizacaoVazia();
             documento.setBeneficiario(beneficiario);
             documentos.add(documento);
+            documentoService.validarDoc(documento);
+
         }
 
         beneficiario.setDocumentos(documentos);
@@ -72,7 +78,7 @@ public class BeneficiarioServiceImpl implements BeneficiarioService {
     public Beneficiario getBenefById(Long id) {
         Optional<Beneficiario> benefOptional = beneficiarioRepository.findById(id);
         if (benefOptional.isEmpty()) {
-            throw new RegraNegocioException("Essee benef não existe!");
+            throw new RegraNegocioException("Essee Beneficiário não existe!");
         }
         return benefOptional.get();
     }
@@ -80,12 +86,13 @@ public class BeneficiarioServiceImpl implements BeneficiarioService {
     @Override
     public void excluirBeneficiario(Long id) {
         Beneficiario benef = beneficiarioRepository.findById(id).orElseThrow(() ->
-                new RegraNegocioException("Benef não encontrada para o ID: " + id));
+                new RegraNegocioException("Beneficiário não encontrada para o ID: " + id));
         beneficiarioRepository.delete(benef);
     }
 
     @Override
     public void validarBenef(Beneficiario benef) {
+
         if (benef.getNome() == null || benef.getNome().trim().isEmpty()) {
             throw new RegraNegocioException("Informe seu Nome");
         }
@@ -95,13 +102,13 @@ public class BeneficiarioServiceImpl implements BeneficiarioService {
         }
 
         if (benef.getTelefone().charAt(0) == '9') {
-            if(benef.getTelefone().length() != 10) {
+            if (benef.getTelefone().length() != 10) {
                 throw new RegraNegocioException("Formato para celular: (90000-0000)");
             }
-        }
-
-        if (benef.getTelefone().length() != 9) {
-            throw new RegraNegocioException("Formato para celular: (XXX-XXXX)");
+        } else {
+            if (benef.getTelefone().length() != 9) {
+                throw new RegraNegocioException("Formato para Telefone: (XXX-XXXX)");
+            }
         }
 
         if (benef.getDataNascimento() == null || benef.getDataNascimento().equals("")) {

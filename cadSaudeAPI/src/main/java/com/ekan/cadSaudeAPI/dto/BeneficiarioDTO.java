@@ -1,7 +1,6 @@
 package com.ekan.cadSaudeAPI.dto;
 
 import com.ekan.cadSaudeAPI.model.Beneficiario;
-import com.ekan.cadSaudeAPI.model.Documento;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

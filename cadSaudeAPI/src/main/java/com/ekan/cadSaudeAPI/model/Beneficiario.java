@@ -33,10 +33,10 @@ public class Beneficiario {
 
     @NotNull
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataInclusao;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataAtualizacao;
 
     @NotNull

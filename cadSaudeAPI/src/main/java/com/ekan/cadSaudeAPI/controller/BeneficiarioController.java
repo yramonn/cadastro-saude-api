@@ -55,13 +55,13 @@ public class BeneficiarioController {
 
             if (doc == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("Usuario não encontrada para o ID: " + id);
+                        .body("Beneficiário não encontrada para o ID: " + id);
             }
 
             return ResponseEntity.ok(DocumentoDTO.converterDoc(doc));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Usuario não encontrada para o ID");
+                    .body("Beneficiário não encontrada para o ID");
         }
     }
 
@@ -72,7 +72,7 @@ public class BeneficiarioController {
             Beneficiario benefExistente = beneficiarioService.getBenefById(id);
             if (benefExistente == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("Benef não encontrado para o ID: " + id);
+                        .body("Beneficiário não encontrado para o ID: " + id);
             }
 
             benefExistente.setNome(dto.getNome());
@@ -83,11 +83,11 @@ public class BeneficiarioController {
             beneficiarioService.validarBenef(benefExistente);
             beneficiarioRepository.save(benefExistente);
 
-            return ResponseEntity.ok("Benef atualizado com sucesso");
+            return ResponseEntity.ok("Beneficiário atualizado com sucesso");
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro ao atualizar Benef para o ID: " + id);
+                    .body("Erro ao atualizar beneficiário para o ID: " + id);
         }
     }
 
@@ -96,9 +96,9 @@ public class BeneficiarioController {
     public ResponseEntity<String> deleteBeneficiario(@PathVariable Long id) {
         try {
             beneficiarioService.excluirBeneficiario(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Benef deletada com sucesso.");
+            return ResponseEntity.status(HttpStatus.OK).body("Beneficiário deletada com sucesso.");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Falha ao deletar benef, o ID não existe!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Falha ao deletar beneficiário, o ID não existe!");
         }
     }
 }
